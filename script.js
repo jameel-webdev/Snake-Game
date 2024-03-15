@@ -1,22 +1,22 @@
-var canvas, ctx;
+let canvas, ctx;
 window.onload = function () {
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
   document.addEventListener("keydown", keyDownEvent);
   // render X times per second
-  var x = 8;
+  let x = 8;
   setInterval(draw, 1000 / x);
 };
-// game world
-var gridSize = (tileSize = 21); // 20 x 20 = 400
-var nextX = (nextY = 0);
+// game world variables
+const gridSize = (tileSize = 21); // 20 x 20 = 400
+let nextX = (nextY = 0);
 // snake
-var defaultTailSize = 3;
-var tailSize = defaultTailSize;
-var snakeTrail = [];
-var snakeX = (snakeY = 10);
+let defaultTailSize = 3;
+let tailSize = defaultTailSize;
+let snakeTrail = [];
+let snakeX = (snakeY = 10);
 // apple
-var appleX = (appleY = 15);
+let appleX = (appleY = 15);
 // draw
 function draw() {
   // move snake in next pos
@@ -35,7 +35,7 @@ function draw() {
   if (snakeY > gridSize - 1) {
     snakeY = 0;
   }
-  //snake bite apple?
+  //Generate apple
   if (snakeX == appleX && snakeY == appleY) {
     tailSize++;
     appleX = Math.floor(Math.random() * gridSize);
@@ -59,7 +59,6 @@ function draw() {
   }
   // paint snake
   // Create gradient
-  // Create gradient
   grd = ctx.createLinearGradient(0.0, 150.0, 300.0, 150.0);
 
   // Add colors
@@ -73,7 +72,7 @@ function draw() {
   grd.addColorStop(1.0, "rgba(111, 186, 130, 1.000)");
 
   ctx.fillStyle = grd;
-  for (var i = 0; i < snakeTrail.length; i++) {
+  for (let i = 0; i < snakeTrail.length; i++) {
     ctx.fillRect(
       snakeTrail[i].x * tileSize,
       snakeTrail[i].y * tileSize,
